@@ -2,6 +2,9 @@
 
 A portfolio-grade Solutions Engineering project that turns deployment events into a unified release health snapshot.
 
+<img width="1482" height="810" alt="image" src="https://github.com/user-attachments/assets/5515a1e4-8ba3-4b78-a74a-055d049d094c" />
+
+
 ## What It Does
 
 After a GitHub Actions deployment, the backend collects signals from observability and product analytics tools, computes a health score, stores a deployment snapshot, and shows the result in a React dashboard.
