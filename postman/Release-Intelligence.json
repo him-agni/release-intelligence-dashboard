@@ -1,0 +1,46 @@
+{
+  "info": {
+    "name": "Release Intelligence",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Health Check",
+      "request": {
+        "method": "GET",
+        "url": "http://localhost:5050/health"
+      }
+    },
+    {
+      "name": "List Deployments",
+      "request": {
+        "method": "GET",
+        "url": "http://localhost:5050/api/deployments"
+      }
+    },
+    {
+      "name": "Reset Demo Deployments",
+      "request": {
+        "method": "POST",
+        "url": "http://localhost:5050/api/deployments/reset"
+      }
+    },
+    {
+      "name": "Mock GitHub Webhook",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"simulation\": { \"scenario\": \"incident\" },\n  \"workflow_run\": {\n    \"id\": \"demo-run-1001\",\n    \"name\": \"Deploy Production\",\n    \"status\": \"completed\",\n    \"conclusion\": \"failure\",\n    \"created_at\": \"2026-06-23T16:00:00.000Z\",\n    \"updated_at\": \"2026-06-23T16:04:00.000Z\",\n    \"head_branch\": \"main\",\n    \"head_sha\": \"abc123demo\",\n    \"triggering_actor\": { \"login\": \"himani\" }\n  },\n  \"repository\": {\n    \"full_name\": \"himani/ai-code-review-bot\"\n  }\n}"
+        },
+        "url": "http://localhost:5050/webhooks/github"
+      }
+    }
+  ]
+}
