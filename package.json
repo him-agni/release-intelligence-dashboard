@@ -2,6 +2,7 @@
   "name": "release-intelligence-dashboard",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "description": "Unified release health dashboard for GitHub Actions, Sentry, PostHog, and GCP Logging signals.",
   "scripts": {
     "dev": "concurrently \"npm run dev --workspace server\" \"npm run dev --workspace client\"",
