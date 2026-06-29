@@ -4,6 +4,7 @@ A portfolio-grade Solutions Engineering project that turns deployment events int
 
 <img width="1482" height="810" alt="image" src="https://github.com/user-attachments/assets/5515a1e4-8ba3-4b78-a74a-055d049d094c" />
 
+Live link: https://release-intelligence-dashboard.vercel.app
 
 ## What It Does
 
