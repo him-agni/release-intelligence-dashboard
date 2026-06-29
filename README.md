@@ -23,6 +23,30 @@ GitHub Actions deployment completes
   -> display in dashboard
 ```
 
+## Architecture
+
+```mermaid
+flowchart LR
+  A[Demo SaaS App Repo] -->|GitHub Actions workflow_run| B[GitHub Webhook]
+  B -->|Signed POST /webhooks/github| C[Express API on Vercel]
+  C -->|Verify signature| D[Release Snapshot Controller]
+  D -->|Parallel fetch| E[GitHub Actions API]
+  D -->|Parallel fetch| F[Sentry API]
+  D -->|Parallel fetch| G[PostHog API]
+  D -->|Parallel fetch| H[GCP Cloud Logging API]
+  E --> I[Health Score + Recommendation]
+  F --> I
+  G --> I
+  H --> I
+  I --> J[(MongoDB Atlas)]
+  J --> K[React Dashboard]
+  C -->|GET /api/deployments| K
+```
+
+```txt
+Core idea: turn a deployment event into one normalized release health decision.
+```
+
 ## Quick Start
 
 ```bash
