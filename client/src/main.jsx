@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client';
 import { Activity, AlertTriangle, CheckCircle2, Clock3, GitBranch, GitCommit, Gauge, Play, RadioTower, RefreshCw, ServerCrash, ShieldCheck, Users } from 'lucide-react';
 import './styles.css';
 
-const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5050';
+const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || (import.meta.env.PROD ? '' : 'http://localhost:5050');
 
 const getApiError = async (response, fallback) => {
   try {

@@ -120,3 +120,7 @@ Zero does not mean fake data. In live mode, zero means the service was queried s
 ## Live Integration Status
 
 The app is complete for mock-mode testing and portfolio demos. Live adapters exist for GitHub Actions jobs, Sentry project issues, PostHog HogQL event counts, and GCP Logging severity counts. See `docs/LIVE_INTEGRATIONS.md`.
+
+## Deployment
+
+The app can deploy to Vercel as a single project that serves both the React dashboard and Express backend. See `docs/VERCEL_DEPLOYMENT.md`.
