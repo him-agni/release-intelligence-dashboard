@@ -52,6 +52,21 @@ app.get('/api/health', (_req, res) => {
   });
 });
 
+const requireLiveDatabase = async (_req, res, next) => {
+  if ((process.env.DATA_MODE || '').trim() !== 'live') {
+    return next();
+  }
+
+  await connectDatabase();
+
+  if (mongoose.connection.readyState !== 1) {
+    return res.status(503).json({ error: 'Database unavailable. Live tracking requires MongoDB persistence.' });
+  }
+
+  return next();
+};
+
+app.use(['/api/deployments', '/webhooks', '/api/webhooks'], requireLiveDatabase);
 app.use('/api/deployments', deploymentRoutes);
 app.use('/webhooks', webhookRoutes);
 app.use('/api/webhooks', webhookRoutes);
