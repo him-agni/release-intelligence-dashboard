@@ -30,7 +30,12 @@ export const fetchPosthogReleaseSignals = async ({ deployedAt }) => {
 
   const { startIso, endIso, previousStartIso } = getTimeWindow(deployedAt);
   const appFilter = process.env.POSTHOG_APP_FILTER?.trim();
-  const appFilterClause = appFilter ? `\n      AND properties.app = '${escapeHogqlString(appFilter)}'` : '';
+  const monitoredProjectFilter = process.env.POSTHOG_MONITORED_PROJECT_FILTER?.trim();
+  const filterClauses = [
+    appFilter ? `properties.app = '${escapeHogqlString(appFilter)}'` : '',
+    monitoredProjectFilter ? `properties.monitored_project = '${escapeHogqlString(monitoredProjectFilter)}'` : ''
+  ].filter(Boolean);
+  const projectFilterClause = filterClauses.length ? `\n      AND ${filterClauses.join('\n      AND ')}` : '';
   const [sessionCount, activeUsers, errorEvents, currentEvents, previousEvents] = await queryHogql(`
     SELECT
       count(DISTINCT properties.$session_id) AS session_count,
@@ -41,7 +46,7 @@ export const fetchPosthogReleaseSignals = async ({ deployedAt }) => {
     FROM events
     WHERE timestamp >= toDateTime('${previousStartIso}')
       AND timestamp <= toDateTime('${endIso}')
-      ${appFilterClause}
+      ${projectFilterClause}
   `);
   const current = Number(currentEvents || 0);
   const previous = Number(previousEvents || 0);

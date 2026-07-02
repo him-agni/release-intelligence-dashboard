@@ -24,11 +24,13 @@ GITHUB_WEBHOOK_SECRET=
 SENTRY_AUTH_TOKEN=
 SENTRY_ORG_SLUG=your-org-slug
 SENTRY_PROJECT_SLUG=your-project-slug
+SENTRY_PROJECT_SLUGS=demo-saas-app-frontend,demo-saas-app-backend
 
 POSTHOG_API_KEY=
 POSTHOG_PROJECT_ID=
 POSTHOG_HOST=https://us.posthog.com
 POSTHOG_APP_FILTER=acmeops
+POSTHOG_MONITORED_PROJECT_FILTER=demo-saas-app
 
 GOOGLE_SERVICE_ACCOUNT_JSON={"type":"service_account",...}
 GOOGLE_SERVICE_ACCOUNT_JSON_BASE64=
@@ -37,6 +39,8 @@ GCP_LOG_NAME=run.googleapis.com%2Fstdout
 ```
 
 `SENTRY_ORG_SLUG` should be only the slug, not the full Sentry URL.
+
+Use `SENTRY_PROJECT_SLUGS` when one monitored app has multiple Sentry projects. It takes precedence over the single `SENTRY_PROJECT_SLUG` value.
 
 `GOOGLE_SERVICE_ACCOUNT_JSON` must be valid JSON on one line so `dotenv` can parse it reliably. The safer option is `GOOGLE_SERVICE_ACCOUNT_JSON_BASE64`, which stores the same JSON encoded as base64.
 
@@ -66,7 +70,7 @@ Expected:
 - GitHub should be fulfilled if the token has Actions read permission.
 - Sentry should be fulfilled if org/project/token scopes are correct.
 - PostHog should be fulfilled, but may show zeros if the project has no events.
-- If one PostHog project contains events for multiple apps, set `POSTHOG_APP_FILTER` to the monitored app's `properties.app` value. For the demo SaaS app, use `acmeops`.
+- If one PostHog project contains events for multiple apps, set `POSTHOG_APP_FILTER` and `POSTHOG_MONITORED_PROJECT_FILTER` to the monitored app properties. For the demo SaaS app, use `acmeops` and `demo-saas-app`.
 - GCP Logging should be fulfilled, but may show zeros if there are no logs in the one-hour post-deploy window.
 
 Zeros are valid live data. They are different from mock values.
