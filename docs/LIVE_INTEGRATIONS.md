@@ -28,6 +28,7 @@ SENTRY_PROJECT_SLUG=your-project-slug
 POSTHOG_API_KEY=
 POSTHOG_PROJECT_ID=
 POSTHOG_HOST=https://us.posthog.com
+POSTHOG_APP_FILTER=acmeops
 
 GOOGLE_SERVICE_ACCOUNT_JSON={"type":"service_account",...}
 GOOGLE_SERVICE_ACCOUNT_JSON_BASE64=
@@ -65,6 +66,7 @@ Expected:
 - GitHub should be fulfilled if the token has Actions read permission.
 - Sentry should be fulfilled if org/project/token scopes are correct.
 - PostHog should be fulfilled, but may show zeros if the project has no events.
+- If one PostHog project contains events for multiple apps, set `POSTHOG_APP_FILTER` to the monitored app's `properties.app` value. For the demo SaaS app, use `acmeops`.
 - GCP Logging should be fulfilled, but may show zeros if there are no logs in the one-hour post-deploy window.
 
 Zeros are valid live data. They are different from mock values.

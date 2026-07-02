@@ -18,6 +18,7 @@ addCheck('SENTRY_PROJECT_SLUG', Boolean(process.env.SENTRY_PROJECT_SLUG), proces
 addCheck('POSTHOG_API_KEY', Boolean(process.env.POSTHOG_API_KEY), process.env.POSTHOG_API_KEY ? 'set' : 'missing');
 addCheck('POSTHOG_PROJECT_ID', /^\d+$/.test(process.env.POSTHOG_PROJECT_ID || ''), 'expected numeric project ID from PostHog URL');
 addCheck('POSTHOG_HOST', /^https:\/\/(us|eu)\.posthog\.com$/.test(process.env.POSTHOG_HOST || ''), 'expected https://us.posthog.com or https://eu.posthog.com');
+addCheck('POSTHOG_APP_FILTER', true, process.env.POSTHOG_APP_FILTER ? `filtering app=${process.env.POSTHOG_APP_FILTER}` : 'optional; counts all app events when unset');
 addCheck('GCP_PROJECT_ID', Boolean(process.env.GCP_PROJECT_ID), process.env.GCP_PROJECT_ID ? 'set' : 'missing');
 addCheck('GCP_LOG_NAME', Boolean(process.env.GCP_LOG_NAME), process.env.GCP_LOG_NAME ? 'set' : 'missing');
 

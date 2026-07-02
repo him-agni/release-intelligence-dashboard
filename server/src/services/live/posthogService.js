@@ -1,5 +1,7 @@
 import { fetchJson, getTimeWindow } from './http.js';
 
+const escapeHogqlString = (value) => String(value).replaceAll('\\', '\\\\').replaceAll("'", "\\'");
+
 const queryHogql = async (query) => {
   const host = process.env.POSTHOG_HOST || 'https://us.posthog.com';
   const projectId = process.env.POSTHOG_PROJECT_ID;
@@ -27,6 +29,8 @@ export const fetchPosthogReleaseSignals = async ({ deployedAt }) => {
   }
 
   const { startIso, endIso, previousStartIso } = getTimeWindow(deployedAt);
+  const appFilter = process.env.POSTHOG_APP_FILTER?.trim();
+  const appFilterClause = appFilter ? `\n      AND properties.app = '${escapeHogqlString(appFilter)}'` : '';
   const [sessionCount, activeUsers, errorEvents, currentEvents, previousEvents] = await queryHogql(`
     SELECT
       count(DISTINCT properties.$session_id) AS session_count,
@@ -37,6 +41,7 @@ export const fetchPosthogReleaseSignals = async ({ deployedAt }) => {
     FROM events
     WHERE timestamp >= toDateTime('${previousStartIso}')
       AND timestamp <= toDateTime('${endIso}')
+      ${appFilterClause}
   `);
   const current = Number(currentEvents || 0);
   const previous = Number(previousEvents || 0);
