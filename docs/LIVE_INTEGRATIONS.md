@@ -68,9 +68,10 @@ Open the dashboard and check `Integration Status`.
 Expected:
 
 - GitHub should be fulfilled if the token has Actions read permission.
-- Sentry should be fulfilled if org/project/token scopes are correct.
+- Sentry should be fulfilled if org/project/token scopes are correct. The dashboard counts unresolved issues recently seen in the release window, which works with repeated AcmeOps demo errors that Sentry groups into existing issues.
 - PostHog should be fulfilled, but may show zeros if the project has no events.
 - If one PostHog project contains events for multiple apps, set `POSTHOG_APP_FILTER` and `POSTHOG_MONITORED_PROJECT_FILTER` to the monitored app properties. For the demo SaaS app, use `acmeops` and `demo-saas-app`.
+- The dashboard counts PostHog exception signals from `$exception`, `demo_frontend_error`, and `demo_backend_error` events.
 - GCP Logging should be fulfilled, but may show zeros if there are no logs in the one-hour post-deploy window.
 
 Zeros are valid live data. They are different from mock values.

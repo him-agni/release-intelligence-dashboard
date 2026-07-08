@@ -21,7 +21,7 @@ export const fetchSentryReleaseSignals = async ({ deployedAt }) => {
 
   const orgSlug = normalizeOrgSlug(process.env.SENTRY_ORG_SLUG);
   const { startIso } = getTimeWindow(deployedAt);
-  const query = encodeURIComponent(`is:unresolved firstSeen:>${startIso}`);
+  const query = encodeURIComponent(`is:unresolved lastSeen:>${startIso}`);
   const issueLists = await Promise.all(
     projectSlugs.map((projectSlug) =>
       fetchJson(`https://sentry.io/api/0/projects/${orgSlug}/${projectSlug}/issues/?query=${query}&limit=100`, {

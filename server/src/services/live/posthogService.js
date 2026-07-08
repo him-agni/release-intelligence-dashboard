@@ -40,7 +40,7 @@ export const fetchPosthogReleaseSignals = async ({ deployedAt }) => {
     SELECT
       count(DISTINCT properties.$session_id) AS session_count,
       count(DISTINCT person_id) AS active_users,
-      countIf(event = '$exception') AS error_events,
+      countIf(event IN ('$exception', 'demo_frontend_error', 'demo_backend_error')) AS error_events,
       countIf(timestamp >= toDateTime('${startIso}') AND timestamp <= toDateTime('${endIso}')) AS current_events,
       countIf(timestamp >= toDateTime('${previousStartIso}') AND timestamp < toDateTime('${startIso}')) AS previous_events
     FROM events
