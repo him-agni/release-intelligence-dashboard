@@ -288,6 +288,8 @@ Snapshots are upserted by `deploymentId`, which maps to the GitHub workflow run 
 
 ## Health Scoring
 
+Detailed scorecard documentation lives in `docs/SCORECARD.md`.
+
 Scoring starts at 100 and subtracts penalties:
 
 - GitHub workflow failure: `-35`
@@ -509,4 +511,3 @@ server/src/services/live/*
 server/src/utils/healthScore.js
 server/src/models/Deployment.js
 ```
-

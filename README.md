@@ -79,6 +79,8 @@ Client: `http://localhost:5173`
 - Mock/live service boundary for demo reliability
 - Release-owner recommendation engine
 
+Scorecard details, including thresholds and recommendation criteria, are documented in `docs/SCORECARD.md`.
+
 ## Demo Script
 
 Use this flow for an interview or portfolio walkthrough.
