@@ -2,7 +2,7 @@
 
 A portfolio-grade Solutions Engineering project that turns deployment events into a unified release health snapshot.
 
-<img width="1482" height="810" alt="image" src="https://github.com/user-attachments/assets/5515a1e4-8ba3-4b78-a74a-055d049d094c" />
+<img width="1412" height="936" alt="image" src="https://github.com/user-attachments/assets/8b39c3e0-7157-4a7c-b442-941c26b4dbcf" />
 
 Live link: https://release-intelligence-dashboard.vercel.app
 
